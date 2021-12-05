@@ -1,7 +1,9 @@
-local DayNumber : number = 1
+local DayNumber : number = 2
 local DoSubmit : boolean = false
 
-local Solution = require(game.ServerScriptService.Solutions).new(DayNumber)
+local ExampleInput = nil
+
+local Solution = require(game.ServerScriptService.Solutions).new(DayNumber, ExampleInput)
 
 print("Part 1 Result: ", Solution:GetPart1Solution())
 print("Part 2 result: ", Solution:GetPart2Solution())
