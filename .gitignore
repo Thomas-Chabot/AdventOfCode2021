@@ -4,3 +4,6 @@
 # Roblox Studio lock files
 /*.rbxlx.lock
 /*.rbxl.lock
+
+# Token file
+/src/Solutions/.token.lua
