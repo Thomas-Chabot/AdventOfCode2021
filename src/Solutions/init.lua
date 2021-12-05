@@ -26,10 +26,14 @@ local Days = script.Days
 local Solution = { }
 Solution.__index = Solution
 
+-- Build up a data object that we can pass in for the problem solutions
 local Data = {
-    Types = script.Types,
-    Parsers = script.Parsers
+    Parsers = { }
 }
+for _,script in ipairs(script.Parsers:GetChildren()) do
+   Data.Parsers[script.Name] = require(script)
+end
+
 
 -- Creates a new Advent of Code user object, which can then be used for grabbing input data and submitting solutions.
 local function initializeAdventOfCode(day : number, year : number?)
