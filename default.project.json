@@ -10,6 +10,12 @@
     },
 
     "ServerScriptService": {
+      "Solutions": {
+        "$path": "src/Solutions"
+      },
+      "AOCClient": {
+        "$path": "library/AdventOfCodeClient"
+      },
       "Server": {
         "$path": "src/server"
       }

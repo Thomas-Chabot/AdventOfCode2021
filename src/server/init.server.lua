@@ -1,1 +1,2 @@
-print("Hello world, from server!")
+local Sol = require(game.ServerScriptService.Solutions.Day1)
+print(Sol)
