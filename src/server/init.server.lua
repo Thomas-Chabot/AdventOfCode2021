@@ -1,4 +1,4 @@
-local DayNumber : number = 2
+local DayNumber : number = 3
 local DoSubmit : boolean = false
 
 local ExampleInput = nil
