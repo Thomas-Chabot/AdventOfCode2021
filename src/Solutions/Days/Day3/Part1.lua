@@ -29,44 +29,17 @@
         So the running time of this solution is O(n*m + m)
 ]]
 
-type SortedCharacterCounts = {
-    Character: string,
-    Count: number
-}
+local getCharacterList = require(script.Parent.GetListByCharacterAtIndex)
+local getSortedCounts = require(script.Parent.GetSortedCounts)
 
-local function determineCharacterCounts(inputLines : {string}, characterIndex : number) : {string: number}
-    local counts = { }
-    
-    -- Determine the counts for each character
-    for _,line in ipairs(inputLines) do
-        local character = line:sub(characterIndex, characterIndex)
-        if not counts[character] then
-            counts[character] = 0
-        end
-        counts[character] += 1
+-- Takes in a Character List, defined by the getCharacterList function.
+-- Returns a dictionary of {character: number of occurences}
+local function generateCharacterCounts(characterLists)
+    local characterCounts = { }
+    for character,strings in pairs(characterLists) do
+        characterCounts[character] = #strings
     end
-
-    return counts
-end
-
-local function getSortedCounts(counts: {string : number}) : {SortedCharacterCounts}
-    local resultsArray = { }
-    
-    -- Store the {character: count} values in an array
-    for character,count in pairs(counts) do
-        table.insert(resultsArray, {
-            Character = character,
-            Count = count
-        })
-    end
-
-    -- Sort the array by number of times the character appears
-    table.sort(resultsArray, function(a, b)
-        return a.Count < b.Count
-    end)
-
-    -- Return the sorted results
-    return resultsArray
+    return characterCounts
 end
 
 return function (input : string, helpers) : number
@@ -80,7 +53,8 @@ return function (input : string, helpers) : number
     -- Can pull from the first entry.
     local numberCharacters = #inputLines[1]
     for i = 1,numberCharacters do
-        local characterCounts = determineCharacterCounts(inputLines, i)
+        local characterLists = getCharacterList(inputLines, i)
+        local characterCounts = generateCharacterCounts(characterLists)
         local sortedCounts = getSortedCounts(characterCounts)
 
         -- Min is the first element in the sorted array, max is the last element.
