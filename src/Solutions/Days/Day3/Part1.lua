@@ -29,9 +29,18 @@
         So the running time of this solution is O(n*m + m)
 ]]
 
-local determineCharacterCounts = require(script.Parent.DetermineCharacterCounts)
+local getCharacterList = require(script.Parent.GetListByCharacterAtIndex)
 local getSortedCounts = require(script.Parent.GetSortedCounts)
 
+-- Takes in a Character List, defined by the getCharacterList function.
+-- Returns a dictionary of {character: number of occurences}
+local function generateCharacterCounts(characterLists)
+    local characterCounts = { }
+    for character,strings in pairs(characterLists) do
+        characterCounts[character] = #strings
+    end
+    return characterCounts
+end
 
 return function (input : string, helpers) : number
     local parsers = helpers.Parsers
@@ -44,7 +53,8 @@ return function (input : string, helpers) : number
     -- Can pull from the first entry.
     local numberCharacters = #inputLines[1]
     for i = 1,numberCharacters do
-        local characterCounts = determineCharacterCounts(inputLines, i)
+        local characterLists = getCharacterList(inputLines, i)
+        local characterCounts = generateCharacterCounts(characterLists)
         local sortedCounts = getSortedCounts(characterCounts)
 
         -- Min is the first element in the sorted array, max is the last element.
